@@ -1,0 +1,11 @@
+Package: PISA2012
+Type: Package
+Title: The package includes my R script and R markdown report.
+Version: 0.1.0
+Author: Wenchi, Tseng
+Maintainer: Wenchi, Tseng <wenchit@andrew.cmu.edu>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: Apache 2.0
+Encoding: UTF-8
+LazyData: true

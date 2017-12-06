@@ -163,6 +163,8 @@ plot(tuk)
 ```
 The boxplot shows there is a significant difference in the mean score of students from different region of Australia. 
 The graph implies that students from large city in Australia, for example, Sydney and Melbourne normally scores higher than students from a village.
+In the ANOVA test, the F value is 29.98 and p-value is very small(less than 0.05). Which implies that there is a significant relationship between the school location and the scores in students' math literacy. And since there are multiple(more than 2) factors in this dataset, we will run another tukey test to compare the differences between each paired groups.
+From the Tukey test above, we can tell that 
 
 ```{r private public analysis}
 library(data.table)
@@ -195,7 +197,7 @@ summary(fit)
 plot_anova <- aov(avg~SC01Q01, data = plot_data)
 summary(plot_anova)
 ```
-
+In the ANOVA test, the F value is 103.9 and p-value is very small(less than 0.05). Suggesting that there is a strong relationship between whether a school is private or public can affect the student's score on math literacy.
 
 ## Conclusion
 A few results can be concluded accroding to the analysis result:

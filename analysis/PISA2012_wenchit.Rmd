@@ -1,23 +1,32 @@
 ---
 title: "PISA2012_wenchit"
-output: pdf_document
+output:
+  pdf_document:
+    citation_package: biblatex
 ---
 ## Abstract
 
-In this research, I want to explore the education resource distribution in Australia. For insatnce, comparing the education resources between remote and city areas and the discrepancies between private or public schools. Based on the PISA2012 mathematics literacy survey data. Also, I will break down the the relationship between school location and how it relates to the scores in math literacy, the relationship between private or public schools and how it relates to the students' scores in math literacy.
+In this research, I want to explore whether there is a discrepancy among scores in mathematic literacy within Australia. For insatnce, comparing the education resources between remote and city areas and the discrepancies between private or public schools. Based on the PISA2012 mathematics literacy survey data using statistical analysis like linear regression model and ANOVA test. Also, I will try to break down the relationship between school location and how it affects the scores in math literacy, the relationship between private or public schools and how it relates to the students' scores in math literacy.
 
 # Introduction
 - PISA2012: the term PISA stands for Programme for International Student Assessment is a survey that randomly select 15 year-old students(students who are attending secondary schools) as samples for assessment. In 2012, a total of 65 OECD countries and economics and about half a million 15 year-old students participated in the PISA assessment. Generally, the assessed reaults lies in 5 categories: Level 5 are high performers, whereas students who lies below the international standard baseline level 2 are cosidered low performers. In 2012, 775 Australian schools and 14,481 studnets participated in this assessment. To ensure the authenticity, an amount of indigenous students were also sampled. 
-Students are categorized in 6 different levels in accordance to their proficiency in the assessment(PISA, 2012):
-Level 6: can conceptualise, generalise and use information. They are capable of advanced mathematical thinking and reasoning; have a mastery of symbolic and formal mathematical operations and relationships; and can formulate and precisely communicate their  ndings, interpretations and arguments. Students who score higher than 669.3 scores belongs to level6.
-Level 5: can develop and work with models for complex situations; select, compare and evaluate appropriate problem-solving strategies for dealing with complex problems; work strategically using broad, well-developed thinking and reasoning skills; and re ect on their work and formulate and communicate their interpretations and reasoning. Students who score higher than 607.0 scores belongs to level5.
-Level 4: can work effectively with explicit models for complex, concrete situations; select and integrate different representations, including symbolic representations; utilise their skills and reason with insight; and construct and communicate explanations and arguments. Students who score higher than 544.7 scores belongs to level4.
-Level 3: can execute clearly described procedures, including those that require sequential decisions; select and apply simple problem-solving strategies; interpret and use representations; typically show some ability to handle percentages, fractions and decimal numbers, and to work with proportional relationships; and provide solutions that re ect that they have engaged in basic interpretation and reasoning. Students who score higher than 482.4 scores belongs to level3.
-Level 2: can interpret and recognise situations in contexts that require no more than direct inference; extract relevant information from a single source and make use of a single representational mode; employ basic algorithms, formulas, procedures or conventions to solve problems involving whole numbers; and make literal interpretations of the results. Students who score higher than 420.1 scores belongs to level2.
-Level 1: can answer questions involving familiar contexts where all relevant information is present and the questions are clearly de ned; identify information and carry out routine procedures; and perform actions that are almost always obvious and follow immediately from the given stimuli. Students who score higher than 357.8 scores belongs to level1.
-Below 1: not demonstrate even the most basic types of mathematical literacy that PISA measures. These students are likely to be seriously disadvantaged in their lives beyond school.
 
-- Mathematic Lieteracy: in the mathematic literacy domain, the assessment focused on students' ability to solve mathematic problems described in a real-life situation. In PISA2012 framework(OECD2012, p25), it defined mathematic literacy as follows: "Mathematic literacy is an individual's capacity to formulate, employ and interpret mathematics in a variety of contexts. It includes reasoning mathematically nd using mathematical concepts, procedures, facts and tools to describe, explain and predict phenomena. It assists individuals to recognise the role that Mathematics plays in the world and to make the well-founded judgments and decisions needed by constructive, engaged and reflective citizens."
+- Students are categorized in 6 different levels in accordance to their proficiency in the assessment(PISA, 2012):
+- Level 6: can conceptualise, generalise and use information. They are capable of advanced mathematical thinking and reasoning; have a mastery of symbolic and formal mathematical operations and relationships; and can formulate and precisely communicate their  ndings, interpretations and arguments. Students who score higher than 669.3 scores belongs to level6.
+
+- Level 5: can develop and work with models for complex situations; select, compare and evaluate appropriate problem-solving strategies for dealing with complex problems; work strategically using broad, well-developed thinking and reasoning skills; and re ect on their work and formulate and communicate their interpretations and reasoning. Students who score higher than 607.0 scores belongs to level5.
+
+- Level 4: can work effectively with explicit models for complex, concrete situations; select and integrate different representations, including symbolic representations; utilise their skills and reason with insight; and construct and communicate explanations and arguments. Students who score higher than 544.7 scores belongs to level4.
+
+- Level 3: can execute clearly described procedures, including those that require sequential decisions; select and apply simple problem-solving strategies; interpret and use representations; typically show some ability to handle percentages, fractions and decimal numbers, and to work with proportional relationships; and provide solutions that re ect that they have engaged in basic interpretation and reasoning. Students who score higher than 482.4 scores belongs to level3.
+
+- Level 2: can interpret and recognise situations in contexts that require no more than direct inference; extract relevant information from a single source and make use of a single representational mode; employ basic algorithms, formulas, procedures or conventions to solve problems involving whole numbers; and make literal interpretations of the results. Students who score higher than 420.1 scores belongs to level2.
+
+- Level 1: can answer questions involving familiar contexts where all relevant information is present and the questions are clearly de ned; identify information and carry out routine procedures; and perform actions that are almost always obvious and follow immediately from the given stimuli. Students who score higher than 357.8 scores belongs to level1.
+
+- Below 1: not demonstrate even the most basic types of mathematical literacy that PISA measures. These students are likely to be seriously disadvantaged in their lives beyond school.
+
+- Mathematic Literacy: in the mathematic literacy domain, the assessment focused on students' ability to solve mathematic problems described in a real-life situation. In PISA2012 framework, it defined mathematic literacy as follows: "Mathematic literacy is an individual's capacity to formulate, employ and interpret mathematics in a variety of contexts. It includes reasoning mathematically nd using mathematical concepts, procedures, facts and tools to describe, explain and predict phenomena. It assists individuals to recognise the role that Mathematics plays in the world and to make the well-founded judgments and decisions needed by constructive, engaged and reflective citizens."
 
 The assessment in math literacy is designed according three main components:
 1. the context of a challenge or problem that arises in the real world
@@ -33,127 +42,119 @@ Town School: 15,000 to about 100,000 people
 City School: 100,000 to about 1,000,000 people, for example, Hobart, Tasmania
 Large City School: ith over 1,000,000 people, for example, Sydney and Melbourne
 
---Facts
+--Facts of Australian Education
 1. In 2016, there are over 9,400 schools in which 1400 of them are secondary schools across Australia.
    Which means more than half of the amount of secondary schools were participants of PISA2012 assessment.
+   
 2. In 2016, there are over 6,000 government(public) schools, more than 1700 Catholic schools(private) and
    more than 1,000 independent schools(private)
+   
 3. In 2017, around 65% of students attended government school, 19% students attended Catholic schools and
    16% students attended independent schools.
+   
+4. In 2014, the proportion of residents aged between 25~34 years old who has a degree was: Major City 42.2 %, 
+   Inner Regional 21.8%, Outer Regional 19.5%, and Remote and Very Remote 17.8%.
 
 # Methods Used
-Linear Mixed Model: including linear regression model and
-ANOVA test:
+ and 
 
+-- PISA2012 data
+In this analysis, the original dataset is provided by library [@PISA2012lite]
+The PISA2012lite dataset contains 10 data tables, including the survey result of school questionnaire and parent questionnaire, 
+plus the student's questionnaire and assesment result. Including 775 Australian schools and 14,481 students participated. Indegi
+I used the 5 plausible values(PV1Math~PV5MATH) for as the measure of a student’s mathematical literacy. The minimum score in this 
+assessment is 0 and maximum is 1,000. For reliability, maller states and indigenous students were oversampled in this assessment. 
 
+-- Technique
+
+Plots:
+the plots are generated with the [@ggplot] library.
+
+Linear Regression Analysis:
+
+ANOVA Test:
+
+Tukey Test:
 
 ## Results
-
-The following graph shows the amount of private and public schools in Australia that participated:
-```{r private/public count plot}
+```{r read in data and test for normality}
 library(data.table)
 library(ggplot2)
 library(PISA2012lite)
+library("dplyr")
+library(lme4)
 data("school2012")
 setDT(school2012)
+data("computerStudent2012")
+setDT(computerStudent2012)
 
-#plot a bar chart
+#calculate the weighted average of the Math Literacy performance using PV1MATH to PV5MATH
+pv_cols <- paste0("PV", 1:5, "MATH")
+student_data <- computerStudent2012[NC == "Australia", 
+                                    lapply(.SD, weighted.mean, w = W_FSTUWT / sum(W_FSTUWT)),
+                                    by = SCHOOLID, .SDcols = c(pv_cols, "ESCS") ][, .(SCHOOLID, ESCS, 
+                                                                       Mean_PVMATH = Reduce(`+`, .SD) / length(.SD)), 
+                                                                       .SDcols = pv_cols]
+#a summary table showing the overall mean math score 
+student_data[,  .(mu = mean(Mean_PVMATH, na.rm = T), sigma = sd(Mean_PVMATH, na.rm = T))]
+
+#test whether the data is normally distributed
+#' Put data onto a standard normal scale
+#' @param x A numeric vector
+#' @return A numeric vector of same length as `x`. This vector has mean 0 and sd 1.
+standardise <- function(x) {
+  (x - mean(x)) / sd(x)
+}
+
+#a plot test for normality
+ggplot(student_data) + stat_qq(aes(sample = Mean_PVMATH %>% standardise)) + geom_abline()
+
+```
+As we can see from the plot above, the column  Mean_PVMATH is normally distributed. Thereby, we can proceed to the statistical test we are going to perform in the following paragraph.
+
+The following graph shows the amount of private and public schools in Australia that participated:
+```{r private/public count plot}
+#plot a bar chart showing the count of private and public schools participated
 ggplot(school2012[NC == "Australia" & !is.na(SC01Q01)], aes(x=SC01Q01))+geom_bar(fill="#E69F00", colour="black")+labs(x="Private or Public", y="Total Count")
 ```
 
 
 The following is a graph about the distribution of schools in Australia that participated:
 ```{r school location plot}
-library(data.table)
-library(ggplot2)
-library(PISA2012lite)
-data("school2012")
-setDT(school2012)
-
-#plot bar chart 
+#plot bar chart showing the school location for schools participated:
 ggplot(school2012[NC == "Australia" & !is.na(SC03Q01)], aes(SC03Q01))+geom_bar(fill="#E69F00", colour="black")+labs(x="School Location", y="Total Count")
 ```
 
-The following is a calculation of math literacy scores by schools participated all across Australia and summarise by its house weight
-and to obtain coefficient in the null model, supposing that school factor is an idependent variable:
-
-```{r null model}
-library(data.table)
-library(ggplot2)
-library(PISA2012lite)
-library(dplyr)
-library(lme4)
-data("computerStudent2012")
-setDT(computerStudent2012)
-
-#calculate the weighted math literacy score, using the column W_FSTUWT
-n <- nrow(computerStudent2012)
-computerStudent2012$W_HOUSEWHT <- n * computerStudent2012$W_FSTUWT / sum(computerStudent2012$W_FSTUWT)
-
-#calculate the weighted average of math literacy scores, using column PV1MATH
-computerStudent2012[NC == "Australia"] %>%
-  group_by(SCHOOLID) %>%
-  summarise(avg1 = weighted.mean(PV1MATH, w = W_HOUSEWHT))
-
-#run linear regression test
-HLM0 <- lmer(PV1MATH ~ (1 | SCHOOLID), data = computerStudent2012[NC == "Australia"],
-             weights = W_HOUSEWHT)
-summary(HLM0)
-```
-The variance is 
-
-The following cosidering the socio-economic state of the student
+The following cosidering the socio-economic state of the student using Mean_PVMATH:
 ```{r ESCS model}
-library(data.table)
-library(ggplot2)
-library(PISA2012lite)
-library(dplyr)
-library(lme4)
-data("computerStudent2012")
-setDT(computerStudent2012)
-
-#calculate the weighted math literacy score, using the column W_FSTUWT
-n <- nrow(computerStudent2012)
-computerStudent2012$W_HOUSEWHT <- n * computerStudent2012$W_FSTUWT / sum(computerStudent2012$W_FSTUWT)
-
-#create a point plot using Australian data
-ggplot(data = computerStudent2012[NC == "Australia"], aes(x = ESCS, y = PV1MATH, size = W_HOUSEWHT)) +
+ggplot(data = student_data, aes(x = ESCS, y = Mean_PVMATH)) +
   geom_point(aes(colour = SCHOOLID)) + geom_smooth(fill="black", colour="darkblue", size=1)+ theme(legend.position="none")+labs(x="Socio-economic state", y="Math Performance")
 ```
-The graph shows the relationship between socio-economic state of a student and their math performance.
-The variance is 
+The graph shows a positive relationship between socio-economic state of a student and their math performance.
 
-
-Now we want to look into the relationship between schools and math performances:
+Now we want to look into the relationship between schools and weighted math performances from PV1MATH to PV5MATH:
 ```{r school loction math analysis}
-library(data.table)
-library(PISA2012lite)
-library("dplyr")
-data("computerStudent2012")
-setDT(computerStudent2012)
-data("school2012")
-setDT(school2012)
-
 #filter out the data from Australia and select column SC03Q01(School location) and SchoolID
 school_view <- school2012[NC =="Australia" & !is.na(SC03Q01)]
 school_plot_data <- select(school_view, SC03Q01, SCHOOLID)
 
-#calculate the weighted math literacy score, using the column W_FSTUWT and filter data within Australia
-n <- nrow(computerStudent2012)
-computerStudent2012$W_HOUSEWHT <- n * computerStudent2012$W_FSTUWT / sum(computerStudent2012$W_FSTUWT)
-student_data <- computerStudent2012[NC == "Australia" & !is.na(PV1MATH), .(avg= weighted.mean(PV1MATH, w = W_HOUSEWHT)), by=SCHOOLID] 
+#merge two tables into one table for plotting use
+plot_data <- merge(student_data, school_plot_data, by="SCHOOLID")
+
+#a simple summary table
+plot_data[, .(mu = mean(Mean_PVMATH, na.rm = T),
+              sigma = sd(Mean_PVMATH, na.rm = T)),
+              by = SC03Q01]
 
 #merge two tables: student_data and school_plot_data and create a boxplot
-plot_data <- merge(student_data, school_plot_data, by="SCHOOLID")
-levels <- levels()
-ggplot(plot_data, aes(x=factor(SC03Q01), y=avg))+geom_boxplot()+labs(x="School Location", y="Math Performance")
+ggplot(plot_data, aes(x=factor(SC03Q01), y=Mean_PVMATH))+geom_boxplot()+labs(x="School Location", y="Math Performance")
 
 #run linear regression test
-fit <- lm(avg~SC03Q01, data=plot_data)
+fit <- lm(Mean_PVMATH~SC03Q01, data=plot_data)
 summary(fit)
 
 #run ANOVA test
-plot_anova <- aov(avg~SC03Q01, data = plot_data)
+plot_anova <- aov(Mean_PVMATH~SC03Q01, data = plot_data)
 summary(plot_anova)
 
 #run Tukey test
@@ -161,60 +162,58 @@ tuk <- TukeyHSD(plot_anova)
 tuk
 plot(tuk)
 ```
+
 The boxplot shows there is a significant difference in the mean score of students from different region of Australia. 
 The graph implies that students from large city in Australia, for example, Sydney and Melbourne normally scores higher than students from a village.
-In the ANOVA test, the F value is 29.98 and p-value is very small(less than 0.05). Which implies that there is a significant relationship between the school location and the scores in students' math literacy. And since there are multiple(more than 2) factors in this dataset, we will run another tukey test to compare the differences between each paired groups.
-From the Tukey test above, we can tell that 
-
+In the linear regression test, the p values are all smaller than 0.05 which implies that the store locations are highly related to a student's math performance.
+In the ANOVA test, the F value is 29.76 and p-value is very small(less than 0.05). Which implies that there is a significant relationship between the school location and the scores in students' math literacy. And since there are multiple(more than 2) factors in this dataset, we will run another tukey test to compare the differences between each paired groups.
+From the Tukey test above, telling from the column diff and p adj, some interesting facts can be able to conclude:
+1. There is no significant discrepancy in performances between a Town school and a Small Town School since the p=0.55>0.05 and Small Town-Village since p=0.07>0.05.
+2. There are significant discrepancy in math performace between City-Village, Large City-Village, Large City-Samll Town, Large City-Town, since the p value all equal to 0. These significant difference is shown in the plotted Tukey graph. Those pairs that are significantly different are those that does not across the 0 value.
+ 
 ```{r private public analysis}
-library(data.table)
-library(PISA2012lite)
-library("dplyr")
-library(ggplot2)
-data("computerStudent2012")
-setDT(computerStudent2012)
-data("school2012")
-setDT(school2012)
-
-#filter out the data from Australia and select column SC01Q01(Private or Public School) and SchoolID
 school_view <- school2012[NC =="Australia" & !is.na(SC01Q01)]
 school_plot_data <- select(school_view, SC01Q01, SCHOOLID)
 
-#calculate the weighted math literacy score, using the column W_FSTUWT and filter data within Australia
-n <- nrow(computerStudent2012)
-computerStudent2012$W_HOUSEWHT <- n * computerStudent2012$W_FSTUWT / sum(computerStudent2012$W_FSTUWT)
-student_data <- computerStudent2012[NC == "Australia" & !is.na(PV1MATH), .(avg= weighted.mean(PV1MATH, w = W_HOUSEWHT)), by=SCHOOLID] 
-
-#merge two tables: student_data and school_plot_data and create a boxplot
+#merge two tables into one table for plotting use
 plot_data <- merge(student_data, school_plot_data, by="SCHOOLID")
-ggplot(plot_data, aes(x=factor(SC01Q01), y=avg))+geom_boxplot()+labs(x="Private or Public", y="Math Performance")
+
+#a simple summary table
+plot_data[, .(mu = mean(Mean_PVMATH, na.rm = T),
+              sigma = sd(Mean_PVMATH, na.rm = T)),
+              by = SC01Q01]
+
+#create a boxplot comparing the mean value
+ggplot(plot_data, aes(x=factor(SC01Q01), y=Mean_PVMATH))+geom_boxplot()+labs(x="Private or Public", y="Math Performance")
 
 #run linear regression test
-fit <- lm(avg~SC01Q01, data=plot_data)
+fit <- lm(Mean_PVMATH~SC01Q01, data=plot_data)
 summary(fit)
 
 #run ANOVA test
-plot_anova <- aov(avg~SC01Q01, data = plot_data)
+plot_anova <- aov(Mean_PVMATH~SC01Q01, data = plot_data)
 summary(plot_anova)
 ```
-In the ANOVA test, the F value is 103.9 and p-value is very small(less than 0.05). Suggesting that there is a strong relationship between whether a school is private or public can affect the student's score on math literacy.
+The boxplot shows there is a great difference in the mean score of students from different sectors of Australia. 
+In the linear regression test, the p values are all smaller than 0.05 which implies that the whether the school is a private on or public one is highly related to a student's math performance.
+The graph implies that students from private schools in Australia outperform the students from government/public schools.
+In the ANOVA test, the F value is 104.9 and p-value is very small(less than 0.05). Suggesting that there is a strong relationship between whether a school is private or public can affect the student's score on math literacy. Since there are only two levels of factors in this test, we will not run a Tukey test like above.
 
 ## Conclusion
 A few results can be concluded accroding to the analysis result:
+
 1. Students from private/independent schools significantly outperform public/government students.
+
 2. Students from large city outperform students from other scetors of students.
-3. Students with a higher socio-economic state also show a higher level of proficiency in math literacy
-According the Independent Review into Regional, Rural and Remote Education from The Department of Education 
-and Training in 2014, the proportion of residents aged between 25~34 years old holding a degree was: Major City 42.2 %, Inner Regional 21.8%, Outer Regional 19.5%, and Remote and Very Remote 17.8%. While there has been growth in the number of people from regional and remote areas 
+
+3. Students with a higher socio-economic state also show a higher level of proficiency in math literacy.
+
+4. The mean score for all Australian students is 495.5, whereas the students from a village is 
+
+ While there has been growth in the number of people from regional and remote areas 
 undertaking an undergraduate degree over the last decade, they remain underrepresented 
 in higher education.
 
-## Reference
-1. Pmc.gov.au. (2017). Remote School Attendance Strategy | Department of the Prime Minister and Cabinet. [online] Available at: https://www.pmc.gov.au/indigenous-affairs/education/remote-school-attendance-strategy [Accessed 29 Nov. 2017].
-2. REGIONAL AND REMOTE EARLY CHILDHOOD EDUCATION. (2017). [pdf] NSW Department of Education. Available at: https://education.nsw.gov.au/media/ecec/pdf-documents/2017/Regional-and-Remote_Literature-Review.pdf [Accessed 30 Nov. 2017].
-3. Thomson, S., Bortoli, L. and Buckley, S. (2013). PISA 2012: How Australia measures up. [pdf] Australian Council for Educational Research. Available at: https://research.acer.edu.au/cgi/viewcontent.cgi?article=1015&context=ozpisa [Accessed 2 Dec. 2017].
-4. En.wikipedia.org. (2017). Structural equation modeling. [online] Available at: https://en.wikipedia.org/wiki/Structural_equation_modeling [Accessed 4 Dec. 2017].
-5. Hox, J. and Bechger, T. (n.d.). An Introduction to Structural Equation Modeling. [ebook] Available at: http://joophox.net/publist/semfamre.pdf [Accessed 4 Dec. 2017].
-6. Bulut, O., Delen, E. and Kaya, F. (2012). An SEM Model based on PISA 2009 in Turkey: How Does the use of Technology and Self-regulation Activities Predict Reading Scores?. Procedia - Social and Behavioral Sciences, 64, pp.564-573.
-7. Austrade.gov.au. (2017). The Australian education system | Australian Education Technology. [online] Available at: https://www.austrade.gov.au/edtech/the-australian-education-system/ [Accessed 6 Dec. 2017].
-8. Halsey, J. (2017). Title: Independent Review into Regional Rural and Remote Education— Discussion Paper. [pdf] The Department of Education and Training. Available at: https://docs.education.gov.au/system/files/doc/other/independent_review_into_regional_rural_and_remote_education.pdf [Accessed 6 Dec. 2017].
+# Reference
+
+

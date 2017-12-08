@@ -2,33 +2,34 @@
 title: "PISA2012_wenchit"
 output:
   pdf_document:
-    citation_package: biblatex
+bibliography: bibliography.bib
 ---
-## Abstract
+# Abstract
 
 In this research, I want to explore whether there is a discrepancy among scores in mathematic literacy within Australia. For insatnce, comparing the education resources between remote and city areas and the discrepancies between private or public schools. Based on the PISA2012 mathematics literacy survey data using statistical analysis like linear regression model and ANOVA test. Also, I will try to break down the relationship between school location and how it affects the scores in math literacy, the relationship between private or public schools and how it relates to the students' scores in math literacy.
 
 # Introduction
-- PISA2012: the term PISA stands for Programme for International Student Assessment is a survey that randomly select 15 year-old students(students who are attending secondary schools) as samples for assessment. In 2012, a total of 65 OECD countries and economics and about half a million 15 year-old students participated in the PISA assessment. Generally, the assessed reaults lies in 5 categories: Level 5 are high performers, whereas students who lies below the international standard baseline level 2 are cosidered low performers. In 2012, 775 Australian schools and 14,481 studnets participated in this assessment. To ensure the authenticity, an amount of indigenous students were also sampled. 
+- PISA2012: the term PISA stands for Programme for International Student Assessment is a survey that randomly select 15 year-old students(students who are attending secondary schools) as samples for assessment. In 2012, a total of 65 OECD countries and economics and about half a million 15 year-old students participated in the PISA assessment. Generally, the assessed reaults lies in 5 categories: Level 5 are high performers, whereas students who lies below the international standard baseline level 2 are cosidered low performers. In 2012, 775 Australian schools and 14,481 students participated in this assessment. To ensure the authenticity, an amount of indigenous students were also sampled. 
 
 - Students are categorized in 6 different levels in accordance to their proficiency in the assessment(PISA, 2012):
-- Level 6: can conceptualise, generalise and use information. They are capable of advanced mathematical thinking and reasoning; have a mastery of symbolic and formal mathematical operations and relationships; and can formulate and precisely communicate their  ndings, interpretations and arguments. Students who score higher than 669.3 scores belongs to level6.
+- Level 6: Students who score higher than 669.3 scores belongs to level6.
 
-- Level 5: can develop and work with models for complex situations; select, compare and evaluate appropriate problem-solving strategies for dealing with complex problems; work strategically using broad, well-developed thinking and reasoning skills; and re ect on their work and formulate and communicate their interpretations and reasoning. Students who score higher than 607.0 scores belongs to level5.
+- Level 5: Students who score higher than 607.0 scores belongs to level5.
 
-- Level 4: can work effectively with explicit models for complex, concrete situations; select and integrate different representations, including symbolic representations; utilise their skills and reason with insight; and construct and communicate explanations and arguments. Students who score higher than 544.7 scores belongs to level4.
+- Level 4: Students who score higher than 544.7 scores belongs to level4.
 
-- Level 3: can execute clearly described procedures, including those that require sequential decisions; select and apply simple problem-solving strategies; interpret and use representations; typically show some ability to handle percentages, fractions and decimal numbers, and to work with proportional relationships; and provide solutions that re ect that they have engaged in basic interpretation and reasoning. Students who score higher than 482.4 scores belongs to level3.
+- Level 3: Students who score higher than 482.4 scores belongs to level3.
 
-- Level 2: can interpret and recognise situations in contexts that require no more than direct inference; extract relevant information from a single source and make use of a single representational mode; employ basic algorithms, formulas, procedures or conventions to solve problems involving whole numbers; and make literal interpretations of the results. Students who score higher than 420.1 scores belongs to level2.
+- Level 2: Students who score higher than 420.1 scores belongs to level2.
 
-- Level 1: can answer questions involving familiar contexts where all relevant information is present and the questions are clearly de ned; identify information and carry out routine procedures; and perform actions that are almost always obvious and follow immediately from the given stimuli. Students who score higher than 357.8 scores belongs to level1.
+- Level 1: Students who score higher than 357.8 scores belongs to level1.
 
 - Below 1: not demonstrate even the most basic types of mathematical literacy that PISA measures. These students are likely to be seriously disadvantaged in their lives beyond school.
 
 - Mathematic Literacy: in the mathematic literacy domain, the assessment focused on students' ability to solve mathematic problems described in a real-life situation. In PISA2012 framework, it defined mathematic literacy as follows: "Mathematic literacy is an individual's capacity to formulate, employ and interpret mathematics in a variety of contexts. It includes reasoning mathematically nd using mathematical concepts, procedures, facts and tools to describe, explain and predict phenomena. It assists individuals to recognise the role that Mathematics plays in the world and to make the well-founded judgments and decisions needed by constructive, engaged and reflective citizens."
 
 The assessment in math literacy is designed according three main components:
+
 1. the context of a challenge or problem that arises in the real world
 2. the nature of mathematical thought and action that can be used to solve the problem
 3. the processes that the problem solver can use to construct a solution.
@@ -54,21 +55,31 @@ Large City School: ith over 1,000,000 people, for example, Sydney and Melbourne
    
 4. In 2014, the proportion of residents aged between 25~34 years old who has a degree was: Major City 42.2 %, 
    Inner Regional 21.8%, Outer Regional 19.5%, and Remote and Very Remote 17.8%.
+   
+Regarding the facts mentioned above, I want to provide    
 
 # Methods Used
- and 
+
+-- Libraries used
+
+1. ggplot2: for plot generation [@ggplot]
+
+2. PISA2012lite: original data set [@PISA2012] 
+
+3. lme4: for linear regression analysis [@lme4]
+
+4. magrittr: for specified functions such as %>% [@mag]
+
+5. data.table: [@table]
+
+6. dplyr: to enable select function [@dplyr]
 
 -- PISA2012 data
-In this analysis, the original dataset is provided by library [@PISA2012lite]
+In this analysis, the original dataset is provided by library 
 The PISA2012lite dataset contains 10 data tables, including the survey result of school questionnaire and parent questionnaire, 
 plus the student's questionnaire and assesment result. Including 775 Australian schools and 14,481 students participated. Indegi
 I used the 5 plausible values(PV1Math~PV5MATH) for as the measure of a student’s mathematical literacy. The minimum score in this 
-assessment is 0 and maximum is 1,000. For reliability, maller states and indigenous students were oversampled in this assessment. 
-
--- Technique
-
-Plots:
-the plots are generated with the [@ggplot] library.
+assessment is 0 and maximum is 1,000. For reliability, smaller states and indigenous students were oversampled in this assessment. 
 
 Linear Regression Analysis:
 
@@ -79,10 +90,11 @@ Tukey Test:
 ## Results
 ```{r read in data and test for normality}
 library(data.table)
+library(dplyr)
 library(ggplot2)
 library(PISA2012lite)
-library("dplyr")
 library(lme4)
+library(magrittr)
 data("school2012")
 setDT(school2012)
 data("computerStudent2012")
@@ -126,7 +138,8 @@ ggplot(school2012[NC == "Australia" & !is.na(SC03Q01)], aes(SC03Q01))+geom_bar(f
 ```
 
 The following cosidering the socio-economic state of the student using Mean_PVMATH:
-```{r ESCS model}
+```{r ESCS plot}
+#a point plot showing the relationship between socio-economic state and math performance
 ggplot(data = student_data, aes(x = ESCS, y = Mean_PVMATH)) +
   geom_point(aes(colour = SCHOOLID)) + geom_smooth(fill="black", colour="darkblue", size=1)+ theme(legend.position="none")+labs(x="Socio-economic state", y="Math Performance")
 ```
@@ -165,11 +178,7 @@ plot(tuk)
 
 The boxplot shows there is a significant difference in the mean score of students from different region of Australia. 
 The graph implies that students from large city in Australia, for example, Sydney and Melbourne normally scores higher than students from a village.
-In the linear regression test, the p values are all smaller than 0.05 which implies that the store locations are highly related to a student's math performance.
-In the ANOVA test, the F value is 29.76 and p-value is very small(less than 0.05). Which implies that there is a significant relationship between the school location and the scores in students' math literacy. And since there are multiple(more than 2) factors in this dataset, we will run another tukey test to compare the differences between each paired groups.
-From the Tukey test above, telling from the column diff and p adj, some interesting facts can be able to conclude:
-1. There is no significant discrepancy in performances between a Town school and a Small Town School since the p=0.55>0.05 and Small Town-Village since p=0.07>0.05.
-2. There are significant discrepancy in math performace between City-Village, Large City-Village, Large City-Samll Town, Large City-Town, since the p value all equal to 0. These significant difference is shown in the plotted Tukey graph. Those pairs that are significantly different are those that does not across the 0 value.
+Those pairs that are significantly different according to to result of Tuckey test are those that does not across the 0 value.
  
 ```{r private public analysis}
 school_view <- school2012[NC =="Australia" & !is.na(SC01Q01)]
@@ -195,11 +204,28 @@ plot_anova <- aov(Mean_PVMATH~SC01Q01, data = plot_data)
 summary(plot_anova)
 ```
 The boxplot shows there is a great difference in the mean score of students from different sectors of Australia. 
-In the linear regression test, the p values are all smaller than 0.05 which implies that the whether the school is a private on or public one is highly related to a student's math performance.
 The graph implies that students from private schools in Australia outperform the students from government/public schools.
+
+## Discussion
+
+According to the school location analysis, we can tell that there is a positive relationship between the school location and the student's math literacy score. The mean score for all Australian students is 495.5, whereas the students from a village is 448.41, mean score for
+students from a large city is 518.59. The difference between mean scores is (518.59-448.41)=70.18 points.
+
+According to the private/public analysis, we can tell that there is a positive relationship between whether the student enters a private or public/government school is a factor that is affecting their PISA mathematical literacy assessment. While the mean score for all Australian students is 495.5, the mean score for students from independent/private sector is 521.067, mean score for students who attend in public/government school is 479.2. The difference is (521.067-479.2)= 41.87 points.
+In the linear regression test from the private/public test, the p values are all smaller than 0.05 which implies that the whether the school is a private on or public one is highly related to a student's math performance.
 In the ANOVA test, the F value is 104.9 and p-value is very small(less than 0.05). Suggesting that there is a strong relationship between whether a school is private or public can affect the student's score on math literacy. Since there are only two levels of factors in this test, we will not run a Tukey test like above.
 
+In the linear regression test for school location, the p values are all smaller than 0.05 which implies that the store locations are highly related to a student's math performance.
+In the ANOVA test, the F value is 29.76 and p-value is very small(less than 0.05). Which implies that there is a significant relationship between the school location and the scores in students' math literacy. And since there are multiple(more than 2) factors in this dataset, we will run another tukey test to compare the differences between each paired groups.
+
+From the Tukey test above, telling from the column diff and p adj, these facts can be able to conclude:
+
+1. There is no significant discrepancy in performances between a Town school and a Small Town School since the p=0.55>0.05 and Small Town-Village since p=0.07>0.05.
+
+2. There are significant discrepancy in math performace between City-Village, Large City-Village, Large City-Samll Town, Large City-Town, since the p value all equal to 0. These significant difference is shown in the plotted Tukey graph. 
+
 ## Conclusion
+
 A few results can be concluded accroding to the analysis result:
 
 1. Students from private/independent schools significantly outperform public/government students.
@@ -208,12 +234,15 @@ A few results can be concluded accroding to the analysis result:
 
 3. Students with a higher socio-economic state also show a higher level of proficiency in math literacy.
 
-4. The mean score for all Australian students is 495.5, whereas the students from a village is 
+4. Averagely, the result of all Australian students fall in level3 of proficiency.
 
- While there has been growth in the number of people from regional and remote areas 
-undertaking an undergraduate degree over the last decade, they remain underrepresented 
-in higher education.
+5. Although the mean score for large city student's is highest among the but the standard deviation is a largest too,
+   implying that the score distribution of large city students is wider than of other sectors. 
 
+To enable deeper investigation in the future, I think it's necessary that we incoporate data source from the Government of 
+Education and try to analyze the discrepancy of education resources and funds distributed across the nation.
+This report can serve as an evidence to the analysis of equalization in education in the future.
+ 
 # Reference
 
 

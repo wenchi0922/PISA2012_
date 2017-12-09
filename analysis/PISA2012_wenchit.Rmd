@@ -282,7 +282,7 @@ According to the private/public analysis, we can tell that there is a positive r
 In the linear regression test from the private/public test, the p values are all smaller than 0.05 which implies that the whether the school is a private on or public one is highly related to a student's math performance.
 In the ANOVA test, the F value is 104.9 and p-value is very small(less than 0.05). Suggesting that there is a strong relationship between whether a school is private or public can affect the student's score on math literacy. Since there are only two levels of factors in this test, we will not run a Tukey test like above.
 
-Evidence shows that whether the school is privately or publicly owned and also the school location is going to affect the students' mathematical literacy score on PISA 2012. Thus we will be rejecting my H0 hypothesis, hence we will be accepting my H1 hypothesis that whether a school is privately or publicly owned and the location of schools will impact on students' test reults on PISA2012 mathematical literacy assessment.
+Evidence shows that whether the school is privately or publicly owned and also the school location and education resource is going to affect the students' mathematical literacy score on PISA 2012. Thus we will be rejecting my H0 hypothesis, hence we will be accepting my H1 hypothesis that whether a school is privately or publicly owned and the location of schools will impact on students' test reults on PISA2012 mathematical literacy assessment.
 
 ## Conclusion
 

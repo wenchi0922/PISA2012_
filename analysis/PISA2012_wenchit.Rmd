@@ -1,12 +1,12 @@
 ---
-title: "PISA2012_wenchit"
+title: "How are education resources distributed in Australia (city vs rural and public vs private) and what effect does this have on mathematics literacy?"
 output:
   pdf_document:
 bibliography: bibliography.bib
 ---
 # Abstract
 
-In this research, I want to explore whether there is a discrepancy among scores in mathematic literacy within Australia. For insatnce, comparing the education resources between remote and city areas and the discrepancies between private or public schools. Based on the PISA2012 mathematics literacy survey data using statistical analysis like linear regression model and ANOVA test. Also, I will try to break down the relationship between school location and how it affects the scores in math literacy, the relationship between private or public schools and how it relates to the students' scores in math literacy.
+In this research, I want to explore whether there is a discrepancy among scores in mathematic literacy within Australia, and how education resource(say, shortage of math teacher) will impact the assessment result. For instance, comparing the education resources between remote and city areas and the discrepancies between private or public schools. Based on the PISA2012 mathematics literacy survey data using statistical analysis like linear regression model and ANOVA test. Also, I will try to break down the relationship between school location and how it affects the scores in math literacy, the relationship between private or public schools and how it relates to the students' scores in math literacy.
 
 # Introduction
 
@@ -96,9 +96,9 @@ Tukey Test: Tukey test is often used with ANOVA test, it allows researchers to c
 
 -- Hypothesis:
 
-H0(null hypothesis): the variables mentioned above is not going to affect the students' test result on PISA 2012 mathematical literacy.
+H0(null hypothesis): the variables mentioned is not going to affect the students' test result on PISA 2012 mathematical literacy.
 
-H1(alternative hypothesis): school location and whether or not the school is privately owned or publicly owned will affect the students' performance on mathematical literacy.
+H1(alternative hypothesis): school location, education resource and whether or not the school is privately owned or publicly owned will affect the students' performance on mathematical literacy.
 
 ## Results
 ```{r read in data and test for normality}
@@ -157,6 +157,38 @@ ggplot(data = student_data, aes(x = ESCS, y = Mean_PVMATH)) +
   geom_point(aes(colour = SCHOOLID)) + geom_smooth(fill="black", colour="darkblue", size=1)+ theme(legend.position="none")+labs(x="Socio-economic state", y="Math Performance")
 ```
 The graph shows a positive relationship between socio-economic state of a student and their math performance.
+
+```{r}
+#create a view selecting country Australia and column SC14Q02 (Lack of math teacher)
+school_view <- school2012[NC =="Australia" & !is.na(SC14Q02)]
+school_plot_data <- select(school_view, SC14Q02, SCHOOLID)
+
+#merge two tables into one table for plotting use
+plot_data <- merge(student_data, school_plot_data, by="SCHOOLID")
+
+#a simple summary table
+plot_data[, .(mu = mean(Mean_PVMATH, na.rm = T),
+              sigma = sd(Mean_PVMATH, na.rm = T)),
+              by = SC14Q02]
+
+#create a box plot
+ggplot(plot_data, aes(x=factor(SC14Q02), y=Mean_PVMATH))+geom_boxplot()+labs(x="Lack of Math Teacher", y="Math Performance")
+
+#run linear regression test
+fit <- lm(Mean_PVMATH~SC14Q02, data=plot_data)
+summary(fit)
+
+#run ANOVA test
+plot_anova <- aov(Mean_PVMATH~SC14Q02, data = plot_data)
+summary(plot_anova)
+
+#run Tukey test
+tuk <- TukeyHSD(plot_anova)
+tuk
+plot(tuk)
+```
+The boxplot infers that there is a difference in the mean score of students from different shortage situation of math teachers. And it impacts the students' math assessment result greatly.
+
 
 Now we want to look into the relationship between schools and weighted math performances from PV1MATH to PV5MATH:
 ```{r school loction math analysis}
@@ -225,17 +257,26 @@ The summary shws that the mean score for all Australian students is 495.5 and th
 
 A stuent's socio-economic state will impact their mathematical literacy assessment.
 
+A statistical look into the shortage of math teachers shows that students from schools that has no shortage of math teachers at all have a hghest mean score of 514.80, whereas students from schools that is lacks a lot of math teachers is 475.73. 
+The linear regression test shows that whether the school is in short of math teachers will impact the student's math assessment result greatly since the p-value is very small(<0.05)
+
+From the Tukey test, we can conclude that:
+
+1. There is no significant discrepancy in performances between schools that is facing A lot-Very little and A lot-To some extent shortage of math teachers.(since the p-value is greater than 0.05)
+
+2. There is a significant difference between schools that is facing To some extent-Not at all, Very little-Not at all and A lot-Not at all shortage of math teachers.(since the p-value is equal to 0 or almost equal to 0)
+
 According to the school location analysis, we can tell that there is a positive relationship between the school location and the student's math literacy score. The mean score for all Australian students is 495.5, whereas the students from a village is 448.41, mean score for
 students from a large city is 518.59. The difference between mean scores is (518.59-448.41)=70.18 points.
 
 In the linear regression test for school location, the p values are all smaller than 0.05 which implies that the store locations are highly related to a student's math performance.
-In the ANOVA test, the F value is 29.76 and p-value is very small(less than 0.05). Which implies that there is a significant relationship between the school location and the scores in students' math literacy. And since there are multiple(more than 2) factors in this dataset, we will run another tukey test to compare the differences between each paired groups.
+In the ANOVA test, the F value is 29.76 and p-value is very small(less than 0.05). Which also implies that there is a significant relationship between the school location and the scores in students' math literacy. And since there are multiple(more than 2) factors in this dataset, we will run another tukey test to compare the differences between each paired groups.
 
 From the Tukey test above, telling from the column diff and p adj, these facts can be able to conclude:
 
 1. There is no significant discrepancy in performances between a Town school and a Small Town School since the p=0.55>0.05 and Small Town-Village since p=0.07>0.05.
 
-2. There are significant discrepancy in math performace between City-Village, Large City-Village, Large City-Samll Town, Large City-Town, since the p value all equal to 0. These significant difference is shown in the plotted Tukey graph. 
+2. There is significant discrepancy in math performace between City-Village, Large City-Village, Large City-Samll Town, Large City-Town, since the p value all equal to 0. These significant difference is shown in the plotted Tukey graph. 
 
 According to the private/public analysis, we can tell that there is a positive relationship between whether the student enters a private or public/government school is a factor that is affecting their PISA mathematical literacy assessment. While the mean score for all Australian students is 495.5, the mean score for students from independent/private sector is 521.067, mean score for students who attend in public/government school is 479.2. The difference is (521.067-479.2)= 41.87 points.
 In the linear regression test from the private/public test, the p values are all smaller than 0.05 which implies that the whether the school is a private on or public one is highly related to a student's math performance.
@@ -260,11 +301,13 @@ A few results can be concluded accroding to the analysis result:
    
 6. Since students from a higher socio-economic family is more likely to enter a private school, these batch of students contributed to the higher performance in mathematical literacy of private schools.
 
+7. The shortage of math resource will also impact on the student's math performance. However, it's interesting that once the school is in short of math teachers, the difference shortage level of math teachers does not impact greatly on the performance. For example, there is no great difference between the mean score of students from schools who are facing: shortage of math teacher to some extent, very little shortage of math teacher and a lot shortage of math teachers.
+
 To enable deeper investigation in the future, I think it's necessary that we incoporate data source from the Government of 
 Education and try to analyze the discrepancy of education resources and funds distributed across the nation.
 This report can serve as an evidence to the analysis of equalization in education in the future. 
 
-Nevertheless, I think the difference in the students' math performance can not serve as the evidence to tell if the students from a village or remote area is "poorly" educated. Since the assessment is standardized, it's actually unable to evaluate intangible attributes of a student, such as their EQ and their values. As far as I know, math is probably something that is comparetively irrelevant for students who comes from indigenous family and live their life in the outback. An assessment on hunting skill seems more crucial to them.
+Nevertheless, I think the difference in the students' math performance can not serve as the evidence to tell if the students from a village or remote area is "poorly" educated. Since the assessment is standardized, it's actually unable to evaluate intangible attributes of a student, such as their EQ and their values. As far as I know, math is probably something that is comparetively irrelevant for students who comes from indigenous family and live their life in the outback. An assessment on hunting skill may seem more crucial to them.
  
 # Reference
 

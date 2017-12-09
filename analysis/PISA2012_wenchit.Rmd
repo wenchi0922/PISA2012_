@@ -37,6 +37,7 @@ The assessment in math literacy is designed according three main components:
 
 # Overview of Australian Education System:
 --Terms and definition
+
 It is defined in the handbook from PISA[@pisamanual] that the size of school is defined as :
 Village School or Rural Area: less than 3,000 people 
 Small Town School: 3,000 to about 15,000 people
@@ -96,6 +97,7 @@ Tukey Test: Tukey test is often used with ANOVA test, it allows researchers to c
 -- Hypothesis:
 
 H0(null hypothesis): the variables mentioned above is not going to affect the students' test result on PISA 2012 mathematical literacy.
+
 H1(alternative hypothesis): school location and whether or not the school is privately owned or publicly owned will affect the students' performance on mathematical literacy.
 
 ## Results

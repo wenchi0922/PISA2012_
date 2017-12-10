@@ -140,7 +140,7 @@ As we can see from the plot above, the column Mean_PVMATH is normally distribute
 The following graph shows the amount of private and public schools in Australia that participated:
 ```{r private/public count plot}
 #plot a bar chart showing the count of private and public schools participated
-ggplot(school2012[NC == "Australia" & !is.na(SC01Q01)], aes(x=SC01Q01))+geom_bar(fill="#E69F00", colour="black")+labs(x="Private or Public", y="Total Count")
+ggplot(school2012[NC == "Australia" & !is.na(SC01Q01)], aes(x=SC01Q01))+geom_bar(fill="#E69F00", colour="black", stat="count")+labs(x="Private or Public", y="Total Count")
 ```
 
 
